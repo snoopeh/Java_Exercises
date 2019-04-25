@@ -5,7 +5,10 @@ import java.util.Scanner;
 
 public class Exercício1 {
 
-	public static void main(String[] args) {
+	//public static void main(String[] args) {
+	public void name() {
+		
+	
 		Scanner sc1 = new Scanner(System.in);
 		int[] ar = criaArray();
 		int[] ar2 = criaArray();
@@ -19,9 +22,9 @@ public class Exercício1 {
 		System.out.println("Número de repetições: " + nroRepeat(ar));
 		System.out.println("======================");
 		System.out.println("Lista de Números Repetidos");
-		List<Integer> repeatArray = listRepeat(ar);
-		for (int i = 0; i < repeatArray.size(); i++) {
-			System.out.print(repeatArray.get(i) + " ");
+		int[] repeatArray = listRepeat(ar);
+		for (int i = 0; i < repeatArray.length; i++) {
+			System.out.print(repeatArray[i] + " ");
 		}
 		System.out.println("\n======================");
 		System.out.println("Array 1: ");
@@ -51,8 +54,8 @@ public class Exercício1 {
 		}
 		System.out.println("\n======================");
 	}
-	
-	private static int[] intersection(int[] l1, int[]l2) {
+
+	private static int[] intersection(int[] l1, int[] l2) {
 		int[] l3 = new int[l1.length + l2.length];
 		int count = 0;
 		for (int j = 0; j <= l1.length - 1; j++) {
@@ -114,29 +117,36 @@ public class Exercício1 {
 	}
 
 	// Método responsável pela lista de repetições
-	private static List<Integer> listRepeat(int[] a) {
-		List<Integer> reps = new ArrayList<Integer>();
+	private static int[] listRepeat(int[] a) {
+		int count = 0;
+		int[] reps = new int[a.length];
 		for (int i = 0; i < a.length; i++) {
 			for (int j = i + 1; j < a.length; j++) {
 				if (a[i] == a[j]) {
-					reps.add(a[i]);
+					reps[count] = a[i];
+					count++;
 				}
 			}
 		}
-		return reps;
+		int[] retReps = new int[count];
+		for (int i = 0; i < count; i++) {
+			retReps[i] = reps[i];
+		}
+
+		return retReps;
 	}
 
 	// Método responsável pela contagem de repetições
 	private static int nroRepeat(int[] a) {
-		List<Integer> reps = new ArrayList<Integer>();
+		int count = 0;
 		for (int i = 0; i < a.length; i++) {
 			for (int j = i + 1; j < a.length; j++) {
 				if (a[i] == a[j]) {
-					reps.add(a[i]);
+					count++;
 				}
 			}
 		}
-		return reps.size();
+		return count;
 	}
 
 	// Método responsável pela validação de repetições
